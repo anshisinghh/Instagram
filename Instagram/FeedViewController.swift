@@ -57,6 +57,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         query.includeKeys(["author", "comments", "comments.author"])
         query.limit = 20
         
+        //query.order(byDescending: "Create At")
+        
         query.findObjectsInBackground { (posts, error) in
             if posts != nil {
                 self.posts = posts!
@@ -127,7 +129,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let comment = comments[indexPath.row - 1]
             cell.commentLabel.text = comment["text"] as? String
             
-            let user = comment["author"] as! PFUser
+            let user = post["author"] as! PFUser
             cell.nameLabel.text = user.username
             
             return cell
